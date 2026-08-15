@@ -10,10 +10,9 @@ import { globalErrorHandler } from "@middlewares";
 
 const app = express();
 
-// Mouting global middlewares
 app.use(cors({
-  origin: 'http://localhost:5173', // exact origin, not '*'
-  credentials: true,               // sets Access-Control-Allow-Credentials: true
+  origin: process.env.CORS_ORIGIN,
+  credentials: true,
 }));
 app.use(morgan('dev'));
 app.use(express.json());

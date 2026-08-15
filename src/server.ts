@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config({path: path.resolve(import.meta.dirname, './config/.env')});
 
-import app from './app.js';
+const {default: app } = await import('./app.js');
 import { connectDb, disconnectDb } from './config/dbConfig.js';
 
 // Graceful termination of process
