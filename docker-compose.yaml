@@ -8,3 +8,8 @@ services:
       - .env
     networks:
       - todo-network
+
+networks:
+  todo-network:
+    external: true
+    name: ---todo-network-actual-name
