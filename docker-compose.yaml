@@ -1,0 +1,10 @@
+service:
+  todo-backend:
+    image: drider101/todo-express-backend:v1
+    container_name: todo-backend
+    ports:
+      - "80:3000"
+    env_list:
+      - .env
+    networks:
+      - todo-network
