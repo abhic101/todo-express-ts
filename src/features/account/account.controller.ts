@@ -38,6 +38,7 @@ class AccountController {
             res.cookie('auth', token, {
                 httpOnly: true,
                 sameSite: 'lax',
+                secure: true,
                 maxAge: 1 * 24 * 60 * 60 * 1000
             });
             res.status(200).json({
