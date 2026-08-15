@@ -2,6 +2,7 @@ services:
   todo-backend:
     image: ---orbuild---
     container_name: todo-backend
+    restart: unless-stopped
     ports:
       - "80:3000"
     env_file:
