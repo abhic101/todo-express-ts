@@ -22,8 +22,15 @@ const updateTaskSchema = addTaskSchema.partial().extend({
     'Please provide atleast one field to update'
 );
 
+const addTaskBatchSchema = z.object({
+    tasks: z.array(addTaskSchema)
+        .min(1, 'No task provided')
+        .max(128, 'Too many tasks to add at once')
+});
+
 export {
     taskIdSchema,
     addTaskSchema,
-    updateTaskSchema
+    updateTaskSchema,
+    addTaskBatchSchema
 }

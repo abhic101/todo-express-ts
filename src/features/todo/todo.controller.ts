@@ -66,6 +66,18 @@ class TodoController {
             next(err);
         }
     }
+
+    addTaskBatchHandler = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const addedTasks = await this.service.addTaskBatch(req.user.userId, req.body.tasks);
+            res.status(201).json({
+                message: 'Tasks merged successfully',
+                tasks: addedTasks
+            });
+        } catch(err: any) {
+            next(err);
+        }
+    }
 }
 
 export default TodoController;

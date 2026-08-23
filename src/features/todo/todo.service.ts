@@ -35,6 +35,11 @@ class TodoService {
         return task;
     }
 
+    async addTaskBatch(userId: string, tasks: TaskI[]): Promise<ReturnType<typeof this.repository.addMany>> {
+        const allTasks = await this.repository.addMany(userId, tasks);
+        return allTasks;
+    }
+
     async updateTask(userId: string, taskId: string, updateTaskI: PartialTaskO): Promise<TaskO> {
         const task = await this.verifyUserAgainstTask(userId, taskId);
 

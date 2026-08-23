@@ -37,6 +37,22 @@ class TodoRepository {
         return task;
     }
 
+    async addMany(userId: string, tasks: TaskI[]) {
+        const transformedTasks = tasks.map((task) => {
+            return {...task, user: userId};
+        })
+        const addedTasks = await this.Task.insertMany(transformedTasks);
+        const flatTasks = addedTasks.map((task) => {
+            return {
+                _id: task._id,
+                task_name: task.task_name,
+                task_details: task.task_details,
+                status: task.status
+            };
+        })
+        return flatTasks;
+    }
+
     async updateOneById(taskId: string, updateTaskI: Partial<Omit<TaskO, '_id' | 'user'>>): Promise<TaskO> {
         try {
             const updatedTask = await this.Task.findOneAndUpdate({_id: taskId},
