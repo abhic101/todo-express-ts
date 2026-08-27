@@ -11,7 +11,8 @@
       "@features/*": ["./src/features/*"],
       "@repositories/*": ["./src/repositories/*"],
       "@middlewares": ["./src/middlewares/index.middleware.js"],
-      "@errors/*": ["./src/errors/*"] 
+      "@errors/*": ["./src/errors/*"],
+      "@constants/*": ["./src/constants/*"]
     },
 
     // Environment Settings

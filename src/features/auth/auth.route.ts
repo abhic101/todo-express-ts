@@ -1,9 +1,10 @@
 import express from 'express';
-import { zodParser, auth } from '@middlewares';
+import { zodParser } from '@middlewares';
 import { loginSchema, signupSchema, usernameSchema } from './auth.schema.js';
 import type AuthController from './auth.controller.js';
+import { auth } from '@/wireDependencies.js';
 
-function createAuthRoute(authController: AuthController): express.Router {
+function createAuthRoute(authController: AuthController) {
     const router = express.Router();
 
     router.post('/login', zodParser(loginSchema), authController.loginHandler);

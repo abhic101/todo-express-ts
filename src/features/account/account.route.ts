@@ -1,7 +1,8 @@
 import express from 'express';
 import type AccountController from './account.controller.js';
-import { auth, zodParser} from '@middlewares';
+import { zodParser} from '@middlewares';
 import { profileUpdateSchema, passwordUpdateSchema, usernameUpdateSchema } from './account.schema.js';
+import { auth } from '@/wireDependencies.js';
 
 function createAccountRoute(accountController: AccountController): express.Router{
     const router = express.Router();

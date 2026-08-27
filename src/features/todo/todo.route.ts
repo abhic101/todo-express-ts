@@ -1,7 +1,8 @@
 import express from 'express';
-import { auth, zodParser } from '@middlewares';
+import { zodParser } from '@middlewares';
 import { taskIdSchema, addTaskSchema, updateTaskSchema, addTaskBatchSchema } from './todo.schema.js';
 import type TodoController from './todo.controller.js';
+import { auth } from '@/wireDependencies.js';
 
 function createTodoRoute(todoController: TodoController) {
     const router = express.Router();

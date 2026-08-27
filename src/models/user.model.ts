@@ -1,33 +1,5 @@
-// import { DataTypes, Model, type Optional } from 'sequelize';
-// import { sequelize } from '@config/dbConfig.js';
-
-enum USER_ROLE {
-    REGISTERED = 'registered',
-    GUEST = 'guest'
-}
-
-// interface UserAttributes {
-//     id: string;
-//     username: string;
-//     passwordHash: string;
-//     type: typeof USER_TYPE[number];
-//     firstname: string;
-//     lastname: string;
-//     is_active: boolean;
-// }
-
-// interface UserCreationAttribute extends Optional<UserAttributes, 'id' | 'lastname' | 'is_active'> {}
-
-// class User extends Model<UserAttributes, UserCreationAttribute> implements UserAttributes {
-//     public id!: string;
-//     public username!: string;
-//     public passwordHash!: string;
-//     public type!: typeof USER_TYPE[number];
-//     public firstname!: string;
-//     public lastname!: string;
-//     public is_active!: boolean;
-// }
 import { Schema, model, Document} from 'mongoose';
+import { USER_ROLE } from '@constants/auth.constants.js';
 
 // Shape of data. For typescript compile time validation
 interface IUser {
@@ -35,7 +7,7 @@ interface IUser {
     passwordHash: string;
     role: USER_ROLE;
     firstname: string;
-    lastname: string;
+    lastname?: string | undefined;
     isActive: boolean;
 }
 

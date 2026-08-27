@@ -1,5 +1,6 @@
 import type  AuthService from './auth.service.js';
 import type { Request, Response, NextFunction } from 'express';
+import * as AuthConstants from '@constants/auth.constants.js';
 
 class AuthController {
     public service: AuthService;
@@ -21,12 +22,12 @@ class AuthController {
 
     loginHandler = async (req: Request, res: Response, next: NextFunction) : Promise<void> => {
         try {
-            const { user, jwtToken } = await this.service.login(req.body);
-            res.cookie('auth', jwtToken, {
-                httpOnly: true,
-                sameSite: 'lax',
-                secure: true,
-                maxAge: 1 * 24 * 60 * 60 * 1000
+            const { user, accessToken, refreshToken } = await this.service.login(req.body);
+            res.cookie('auth', accessToken, { ...(AuthConstants.AUTH_COOKIES_PROPERTIES),
+                maxAge: AuthConstants.ACCESS_TOKEN_COOKIE_LIFESPAN
+            });
+            res.cookie('refresh', JSON.stringify(refreshToken), { ...AuthConstants.AUTH_COOKIES_PROPERTIES,
+                maxAge: AuthConstants.REFRESH_TOKEN_COOKIE_LIFESPAN
             });
             res.status(200).json({
                 message: 'Login Successfull',
@@ -51,6 +52,9 @@ class AuthController {
 
     logoutHandler = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            const refreshToken = JSON.parse(req.cookies.refresh);
+            await this.service.logout(refreshToken.tokenId);
+            console.log(req.cookies.refresh);
             res.clearCookie('auth');
             res.status(200).json({
                 message: 'Logout Successfull'
