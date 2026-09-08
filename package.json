@@ -1,6 +1,6 @@
 {
   "name": "todo-express-react-postgres",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "Node Express Backend with Postgress DB using Sequelize ORM. React frontend.",
   "license": "MIT",
   "author": "Drago",
